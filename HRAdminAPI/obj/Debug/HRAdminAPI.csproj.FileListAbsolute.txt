@@ -1,0 +1,6 @@
+D:\ThuanPC\Github\Hoc_lap_trinh\HRAdminAPI\bin\Debug\HRAdminAPI.dll
+D:\ThuanPC\Github\Hoc_lap_trinh\HRAdminAPI\bin\Debug\HRAdminAPI.pdb
+D:\ThuanPC\Github\Hoc_lap_trinh\HRAdminAPI\obj\Debug\HRAdminAPI.csproj.AssemblyReference.cache
+D:\ThuanPC\Github\Hoc_lap_trinh\HRAdminAPI\obj\Debug\HRAdminAPI.csproj.CoreCompileInputs.cache
+D:\ThuanPC\Github\Hoc_lap_trinh\HRAdminAPI\obj\Debug\HRAdminAPI.dll
+D:\ThuanPC\Github\Hoc_lap_trinh\HRAdminAPI\obj\Debug\HRAdminAPI.pdb
