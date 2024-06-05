@@ -5,6 +5,13 @@ using System.Linq;
 
 namespace SchoolHRAdmin
 {
+    public enum EmployeeType
+    {
+        Teacher,
+        HeadOfDepartment,
+        DeputyHeadMaster,
+        HeadMaster
+    }
     internal class Program
     {
         static void Main(string[] args)
@@ -24,45 +31,19 @@ namespace SchoolHRAdmin
         }
         public static void SeedData(List<IEmployee> employees)
         {
-            IEmployee teacher1 = new Teacher
-            {
-                Id = 1,
-                FristName = "Bob",
-                LastName = "Fisher",
-                Salary = 40000,
-            };
+            IEmployee teacher1 = EmployeeFactory.GetEmployeeInstance(EmployeeType.Teacher, 1, "Bob", "Fisher", 40000);
             employees.Add(teacher1);
-            IEmployee teacher2 = new Teacher
-            {
-                Id = 2,
-                FristName = "Jenny",
-                LastName = "Thomas",
-                Salary = 40000,
-            };
+            IEmployee teacher2 = EmployeeFactory.GetEmployeeInstance(EmployeeType.Teacher, 2, "Jenny", "Thomas", 40000);
+            
             employees.Add(teacher2);
-            IEmployee headOfDepartment = new HeadOfDepartment
-            {
-                Id = 3,
-                FristName = "Brenda",
-                LastName = "Mullins",
-                Salary = 50000,
-            };
+            IEmployee headOfDepartment = EmployeeFactory.GetEmployeeInstance(EmployeeType.HeadOfDepartment, 3, "Brenda", "Mullins", 50000);
+            
             employees.Add(headOfDepartment);
-            IEmployee deputyHeadMaster = new DeputyHeadMaster
-            {
-                Id = 4,
-                FristName = "Devlin",
-                LastName = "Brown",
-                Salary = 60000,
-            };
+            IEmployee deputyHeadMaster = EmployeeFactory.GetEmployeeInstance(EmployeeType.DeputyHeadMaster, 4, "Devlin", "Brown", 60000);
+            
             employees.Add(deputyHeadMaster);
-            IEmployee headMaster = new HeadMaster
-            {
-                Id = 5,
-                FristName = "Damien",
-                LastName = "Jones",
-                Salary = 80000,
-            };
+            IEmployee headMaster = EmployeeFactory.GetEmployeeInstance(EmployeeType.HeadMaster, 5, "Damien", "Jones", 80000);
+            
             employees.Add(headMaster);
         }
     }
@@ -81,5 +62,41 @@ namespace SchoolHRAdmin
     public class HeadMaster : EmployeeBase
     {
         public override decimal Salary { get => base.Salary + (base.Salary * 0.05m); }
+    }
+    public static class EmployeeFactory
+    {
+        public static IEmployee GetEmployeeInstance(EmployeeType employeeType, int id, string firstName, string lastName, decimal salary)
+        {
+            IEmployee employee = null;
+            switch (employeeType)
+            {
+                case EmployeeType.Teacher:
+                    employee = FactoryPattern<IEmployee, Teacher>.GetInstance();
+                    break;
+                case EmployeeType.HeadOfDepartment:
+                    employee = FactoryPattern<IEmployee, HeadOfDepartment>.GetInstance();
+                    break;
+                case EmployeeType.DeputyHeadMaster:
+                    employee = FactoryPattern<IEmployee, DeputyHeadMaster>.GetInstance();
+                    break;
+                case EmployeeType.HeadMaster:
+                    employee = FactoryPattern<IEmployee, HeadMaster>.GetInstance();
+                    break;
+                default:
+                    break;
+            }
+            if(employee != null)
+            {
+                employee.Id = id;
+                employee.FristName = firstName;
+                employee.LastName = lastName;
+                employee.Salary = salary;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
+            return employee;
+        }
     }
 }
